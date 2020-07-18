@@ -1,10 +1,10 @@
 # coding=utf-8
 
 from requests import post, get as _get
+from mySpider import writeFile
 from os import system, path, mkdir
 from json import loads
 from urllib.parse import quote
-from mySpider import writeFile
 
 
 def init():
