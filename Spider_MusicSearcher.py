@@ -1,9 +1,9 @@
 # coding=utf-8
 
 from requests import post, get as _get
+from os import system, path, mkdir
 from json import loads
 from urllib.parse import quote
-from os import system, path, mkdir
 from mySpider import writeFile
 
 
