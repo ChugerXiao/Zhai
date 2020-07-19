@@ -42,23 +42,7 @@ def searcher(Type):
         name = input('请输入你想下载的歌曲：')
         nameCode = quote(name)
         url = 'https://www.socarchina.com/vipmusic/'
-        headers = {
-            'Accept': 'application/json, text/javascript, */*; q=0.01',
-            'Accept-Encoding': 'gzip, deflate, br',
-            'Accept-Language': 'zh-CN,zh;q=0.9',
-            'Connection': 'keep-alive',
-            'Content-Length': '63',
-            'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8',
-            'Cookie': 'Brjo_2132_saltkey=UM0H0Cs6; Brjo_2132_lastvisit=1594892754; Brjo_2132_sid=mHc1X3; Brjo_2132_pc_size_c=0; Brjo_2132_sendmail=1; _uab_collina=159489635439437499862825; Hm_lvt_96e8508a8fb22d0cd3c3f57935679158=1594896357; Brjo_2132_lastact=1594896366%09forum.php%09image; UM_distinctid=173573b3e837cd-0e734a44273d72-4353760-144000-173573b3e84790; CNZZDATA3060925=cnzz_eid%3D1699485804-1594894289-%26ntime%3D1594894289; Hm_lpvt_96e8508a8fb22d0cd3c3f57935679158=1594896368',
-            'Host': 'www.socarchina.com',
-            'Origin': 'https://www.socarchina.com',
-            'Referer': 'https://www.socarchina.com/vipmusic/?name={}&type={}'.format(nameCode, Type),
-            'Sec-Fetch-Dest': 'empty',
-            'Sec-Fetch-Mode': 'cors',
-            'Sec-Fetch-Site': 'same-origin',
-            'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/83.0.4103.116 Safari/537.36',
-            'X-Requested-With': 'XMLHttpRequest'
-        }
+        headers = {'X-Requested-With': 'XMLHttpRequest'}
         data = {
             'input': name,
             'filter': 'name',
@@ -104,6 +88,8 @@ def searcher(Type):
                     continue
                 try:
                     print('加载中。。。')
+                    if Type == 'netease':
+                        urlS = _get(urlS, allow_redirects=False).headers['location']
                     video = _get(urlS)
                     writeFile(video, 'music\\' + fileName + urlS[len(urlS) - 4:len(urlS)])
                     sys = system('cls')
@@ -120,7 +106,6 @@ def searcher(Type):
                     print('{}. {} - {}'.format(each, author[each], title[each]))
                 code = input('10.重新搜索\n11.更换源站\n请正确输入编号：')
                 continue
-
         if code == 10:
             sys = system('cls')
             continue
@@ -132,5 +117,9 @@ def searcher(Type):
 
 
 if __name__ == '__main__':
-    TypeMain = init()
-    TypeMain = searcher(TypeMain)
+    try:
+        TypeMain = init()
+        TypeMain = searcher(TypeMain)
+    except:
+        print('\n\n马有失蹄，猿有失手。。。\n出错了！请将错误发送给开发人员，QQ：3412546697，万分感谢')
+        while True: a = 1
