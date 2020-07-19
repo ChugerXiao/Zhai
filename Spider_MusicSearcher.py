@@ -21,6 +21,7 @@ def init():
         '  目前支持以下源：\n\n  0. 网易云{}1. QQ音乐\n  2. 酷狗音乐{}3. 酷我音乐\n  4. 虾米{}5. 百度音乐\n  6. 一听音乐{}7. 咪咕\n  8. 荔枝{}9. 蜻蜓\n  10. 喜马拉雅{}11. 全民K歌'.format(
             ' ' * 24, ' ' * 22, ' ' * 26, ' ' * 22, ' ' * 26, ' ' * 21))
     SourceCode = input('\n注：有一些源暂时无解析，等待一段时间就可能能用了。\n推荐：酷狗音乐、咪咕、网易云。\n\n请输入站点编号：')
+    # SourceCode = 0  # 调试
     while 1:
         try:
             SourceCode = int(SourceCode)
@@ -40,6 +41,7 @@ def searcher(Type):
     sys = system('cls')
     while 1:
         name = input('请输入你想下载的歌曲：')
+        # name = '梅香如故'  # 调试
         nameCode = quote(name)
         url = 'https://www.socarchina.com/vipmusic/'
         headers = {'X-Requested-With': 'XMLHttpRequest'}
@@ -89,10 +91,23 @@ def searcher(Type):
                 try:
                     print('加载中。。。')
                     if Type == 'netease':
-                        urlS = _get(urlS, allow_redirects=False).headers['location']
-                    video = _get(urlS)
-                    writeFile(video, 'music\\' + fileName + urlS[len(urlS) - 4:len(urlS)])
-                    sys = system('cls')
+                        headers = {
+                            'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/83.0.4103.116 Safari/537.36'}
+                        try:
+                            urlS = _get(urlS, headers=headers, allow_redirects=False).headers['location']
+                            video = _get(urlS)
+                            writeFile(video, 'music\\' + fileName + urlS[len(urlS) - 4:len(urlS)])
+                            sys = system('cls')
+                        except:
+                            sys = system('cls')
+                            for each in range(len(title)):
+                                print('{}. {} - {}'.format(each, author[each], title[each]))
+                            code = input('10.重新搜索\n11.更换源站\n这个源出了点小问题。。。请选择其他源或其他歌手：')
+                            continue
+                    else:
+                        video = _get(urlS)
+                        writeFile(video, 'music\\' + fileName + urlS[len(urlS) - 4:len(urlS)])
+                        sys = system('cls')
                 except:
                     sys = system('cls')
                     print('TimeOutError\n网络异常，请检查网络，稍后重试。')
