@@ -16,6 +16,8 @@ from mySpider import writeFile
 > myOrders.py
 收录一些常用的日常代码
 ```python
+import sys, math, win32con, win32api, win32gui, time, pyperclip
+
 def showBar(small, big, preEqual: "int" = 5):pass
 # 显示进程条，例如50%=====>-----。
 # 参数：已执行进程数，总进程数，每一个格子代表的百分数
@@ -41,6 +43,8 @@ def getAllWindows():pass
 > mySpider.py
 收录一些写爬虫时常用的代码
 ```python
+import requests
+
 def requestsWhileTimes(url, time, times=1, string='erro', cut: 'bool' = False, headers={}, params={}):pass
 # 使用requests.get爬取网页多次，失败就重新爬取。
 # 参数：网页，连接超时时间，尝试次数，提示错误信息，超过次数是否停止代码运行，headers，data
@@ -64,11 +68,13 @@ def writeArticle(title, article, filename):pass
 
 > myPassword.py
 收录竹隐紫铎斋自创的“六十四数周易加密法”
->>注释
+>>注释：
 六十四数周易加密法，将一个字符串的编码转为64进制，然后使用周易六十四卦编码，中间会加入凑数位、分隔位、混淆位等。
->>>严肃声明
-谢绝解密！！！找新加密方式解析的大佬请出门右拐。
+**严肃声明：
+谢绝解密！！！找新加密方式解析的大佬请出门右拐。**
 ```python
+import random
+
 def toScale(number):pass
 # 将一个十进制数转化为64进制数（输出字符串）。
 # 参数：十进制数（支持字符串）
