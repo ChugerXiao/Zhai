@@ -10,6 +10,8 @@ mixPanel = ['天', '地', '山', '泽', '水', '火', '风', '雷']
 intervalPanel = ['吉', '凶', '元', '亨', '利', '贞']
 
 
+# 将一个十进制数转化为64进制数（输出字符串）。
+# 参数：十进制数（支持字符串）
 def toScale(number):
     scale = ''
     number = int(number)
@@ -22,6 +24,8 @@ def toScale(number):
     return scale
 
 
+# 将一个64进制数转化为十进制数（输出字符串）。
+# 参数：64进制数（支持字符串）
 def toDec(number):
     power = dec = 0
     number = str(number)
@@ -33,6 +37,8 @@ def toDec(number):
     return dec
 
 
+# 将一个字符串使用六十四数周易法加密。
+# 参数：需加密的字符串
 def encryption(String: 'str'):
     password = ''
     character = [each for each in String]
@@ -52,6 +58,8 @@ def encryption(String: 'str'):
     return password
 
 
+# 将密码使用六十四数周易法解密。
+# 参数：需解密的字符串
 def decode(code: 'str'):
     origin = ''
     for each in intervalPanel:
