@@ -9,7 +9,6 @@ from rarfile import RarFile
 from zipfile import ZipFile
 from urllib3 import disable_warnings, exceptions
 from threading import Thread, Semaphore
-from time import sleep
 
 disable_warnings(exceptions.InsecureRequestWarning)
 
