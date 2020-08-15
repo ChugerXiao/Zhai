@@ -8,6 +8,8 @@ from myOrders import showBar
 from rarfile import RarFile
 from zipfile import ZipFile
 from urllib3 import disable_warnings, exceptions
+from threading import Thread, Semaphore
+from time import sleep
 
 disable_warnings(exceptions.InsecureRequestWarning)
 
@@ -118,18 +120,28 @@ def downloader(code, key):
     nameList = listdir('PPT')
     extensions = []
     print('读取成功！开始下载')
+    pools = Semaphore(4)
+    threads = []
+
+    def down(e):
+        with pools:
+            downFilename = key + code[e]
+            if judgeFile(downFilename, nameList) == -1: return 0
+            try:
+                downloadUrl = processor(code[e])
+                extensions.append(downloadUrl[len(downloadUrl) - 4:len(downloadUrl)])
+                with open('temp\\{}.temp'.format(downFilename), 'wb') as f:
+                    f.write(_get(downloadUrl, verify=False).content)
+            except:
+                pass
+
     for each in range(len(code)):
+        threads.append(Thread(target=down,args=(each,)))
+    for each in threads:
+        each.start()
+    for each in range(len(threads)):
         showBar(each + 1, len(code) + 1)
-        filename = key + code[each]
-        judgeCode = judgeFile(filename, nameList)
-        if judgeCode == -1: continue
-        try:
-            downloadUrl = processor(code[each])
-            extensions.append(downloadUrl[len(downloadUrl) - 4:len(downloadUrl)])
-            with open('temp\\{}.temp'.format(filename), 'wb') as f:
-                f.write(_get(downloadUrl, verify=False).content)
-        except:
-            pass
+        threads[each].join()
     print('\n下载完毕！正在解压')
     for each in range(len(code)):
         showBar(each + 1, len(code) + 1)
