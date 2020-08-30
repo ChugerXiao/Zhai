@@ -6,10 +6,6 @@ from random import choice
 
 packages.urllib3.disable_warnings()
 
-StrWeatherToday = [
-    '斋主，金天{}白天{}，气温在{}，晚上{}，气温{}。金天紫外线强度{}，空气污染指数{}，{}',
-    '回斋主，{}白天{}，{}。晚上{}，{}。紫外线{}，空气污染{}，斋主，{}']
-
 
 def init():
     global code, city
@@ -24,6 +20,11 @@ def init():
         code = 101120801
     else:
         StrFileBroken()
+
+
+StrWeatherToday = [
+    '斋主，金天{}白天{}，气温在{}，晚上{}，气温{}。金天紫外线强度{}，空气污染指数{}，{}',
+    '回斋主，{}白天{}，{}。晚上{}，{}。紫外线{}，空气污染{}，斋主，{}']
 
 
 def sayWeatherToday():
@@ -43,10 +44,14 @@ def sayWeatherToday():
     wea = BeautifulSoup(msg.text, 'html.parser').find_all('p', class_="wea")
     msg = str(BeautifulSoup(msg.text, 'html.parser').find_all('ul', class_="clearfix")).split('<span>')
     say(choice(StrWeatherToday).format(city, wea[0].text, tem[0].text.replace('\n', ''), wea[1].text,
-                                     tem[1].text.replace('\n', ''), msg[10][0:msg[10].find('<')],
-                                     msg[15][0:msg[15].find('<')],
-                                     msg[13][msg[13].find('<p>') + 3:msg[13].find('</p>')]))
+                                       tem[1].text.replace('\n', ''), msg[10][0:msg[10].find('<')],
+                                       msg[15][0:msg[15].find('<')],
+                                       msg[13][msg[13].find('<p>') + 3:msg[13].find('</p>')]))
 
+# 城市 city    天气 wea[0].text    温度 tem[0].text.replace('\n', '')
+# 晚上 wea[1].text    温度 tem[1].text.replace('\n', '')
+# 紫外线 msg[10][0:msg[10].find('<')]    空气污染 msg[15][0:msg[15].find('<')]
+# 建议 msg[13][msg[13].find('<p>') + 3:msg[13].find('</p>')]
 
 StrWeatherThreeDay = [
     '斋主，{}金天{},{}，明天{}，{}，后天{},{}',
@@ -68,6 +73,7 @@ def sayWeatherThreeDay():
         sayConnectError()
         return 0
     tem = BeautifulSoup(msg.text, 'html.parser').find_all('p', class_="tem")
-    say(choice(StrWeatherThreeDay).format(city, wea[0].text, tem[0].text.replace('\n', '').replace('/', '到'), wea[1].text,
-                                        tem[1].text.replace('\n', '').replace('/', '到'), wea[2].text,
-                                        tem[2].text.replace('\n', '').replace('/', '到')))
+    say(choice(StrWeatherThreeDay).format(city, wea[0].text, tem[0].text.replace('\n', '').replace('/', '到'),
+                                          wea[1].text,
+                                          tem[1].text.replace('\n', '').replace('/', '到'), wea[2].text,
+                                          tem[2].text.replace('\n', '').replace('/', '到')))
