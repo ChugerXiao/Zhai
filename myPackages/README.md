@@ -39,6 +39,9 @@ def QQSend(receiver, msg, send: 'bool' = True):pass
 
 def getAllWindows():pass
 # 获取所有打开的窗口名字。
+
+def fileTree(treePath):pass
+# 获取目录所有的文件与子文件路径
 ```
 > mySpider.py
 收录一些写爬虫时常用的代码

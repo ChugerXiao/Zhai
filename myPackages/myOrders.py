@@ -6,6 +6,7 @@ from win32gui import FindWindow, SendMessage, IsWindowVisible, IsWindow, IsWindo
     EnumWindows
 from time import sleep
 from pyperclip import copy, paste
+from os import path, listdir
 
 
 # 显示进程条，例如50%=====>-----。
