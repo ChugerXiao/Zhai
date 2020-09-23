@@ -103,3 +103,21 @@ def getAllWindows():
     titles = [each for each in titles if each]
     titles.sort()
     return titles
+
+
+# 获取目录所有的文件与子文件路径
+def fileTree(treePath):
+    files = []
+
+    def tree(nowPath):
+        file = listdir(nowPath)
+        for each in file:
+            if path.isfile(nowPath + '\\' + each):
+                files.append(nowPath + '\\' + each)
+            elif path.isdir(nowPath + '\\' + each):
+                tree(nowPath + '\\' + each)
+            else:
+                pass
+
+    tree(treePath)
+    return files
