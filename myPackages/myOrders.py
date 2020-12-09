@@ -116,6 +116,7 @@ def fileTree(treePath):
             if path.isfile(nowPath + '\\' + each):
                 files.append(nowPath + '\\' + each)
             elif path.isdir(nowPath + '\\' + each):
+                files.append(nowPath + '\\' + each)
                 tree(nowPath + '\\' + each)
             else:
                 pass
