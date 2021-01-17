@@ -68,29 +68,3 @@ def writeArticle(title, article, filename):pass
 # 下载文字。
 # 参数：文字内容，章名，文字命名
 ```
-
-> myPassword.py
-收录竹隐紫铎斋自创的“六十四数周易加密法”
->><br/>注释</br>
-六十四数周易加密法，将一个字符串的编码转为64进制，然后使用周易六十四卦编码，中间会加入凑数位、分隔位、混淆位等。
->>>**<br/>严肃声明</br>
-谢绝解密！！！找新加密方式解析的大佬请出门右拐。**
-```python
-import random
-
-def toScale(number):pass
-# 将一个十进制数转化为64进制数（输出字符串）。
-# 参数：十进制数（支持字符串）
-
-def toDec(number):pass
-# 将一个64进制数转化为十进制数（输出字符串）。
-# 参数：64进制数（支持字符串）
-
-def encryption(String: 'str'):pass
-# 将一个字符串使用六十四数周易法加密。
-# 参数：需加密的字符串
-
-def decode(code: 'str'):pass
-# 将密码使用六十四数周易法解密。
-# 参数：需解密的字符串
-```
