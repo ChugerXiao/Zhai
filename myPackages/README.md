@@ -42,6 +42,9 @@ def getAllWindows():pass
 
 def fileTree(treePath):pass
 # 获取目录所有的文件与子文件路径
+
+def getCMDPutout(command):pass
+# 实时获取cmd输出信息
 ```
 > mySpider.py
 收录一些写爬虫时常用的代码

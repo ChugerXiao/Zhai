@@ -123,3 +123,14 @@ def fileTree(treePath):
 
     tree(treePath)
     return files
+
+
+# 实时获取cmd输出信息
+def getCMDPutout(command):
+    screenData = subprocess.Popen(command, stdout=subprocess.PIPE, stderr=subprocess.STDOUT, shell=False)
+    while True:
+        line = screenData.stdout.readline()
+        print(line.decode('gbk').strip("b'"))
+        if line == b'' or subprocess.Popen.poll(screenData) == 0:
+            screenData.stdout.close()
+            break
